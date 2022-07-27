@@ -1,16 +1,19 @@
 import NavBar from "./NavBar";
-function App() {
+import ItemListContainer from "./ItemListContainer";
+
+const  App = () => {
   return (
     <>
-     <NavBar />
-    <main>
-      <h2>Home</h2>
-    </main>
-    <footer>
-      <p>footer</p>
-    </footer>
+      <NavBar />
+      <ItemListContainer />
+      <main>
+        <h2>Home</h2>
+      </main>
+      <footer>
+        <p>footer</p>
+      </footer>
     </>
-   
+
   )
 }
 
