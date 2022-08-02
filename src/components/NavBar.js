@@ -1,6 +1,6 @@
 const NavBar =() => {
     return (
-        <header id="header">
+        <header className="header">
             <h1 className="header__title">Hotel.com</h1>
             <img className="header__logo" src="/logo192.png" />
             <nav className="header__items">

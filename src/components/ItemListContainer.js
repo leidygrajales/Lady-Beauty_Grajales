@@ -1,9 +1,20 @@
-const ItemListContainer = () => {
-  return (
-   <div className="container">
+import ItemCount from "./ItemCount"
 
-     <p className="container__text">¿deseas viajar y no sabes donde ir?</p>
-   </div>
+const ItemListContainer = ({ greeting }) => {
+
+  const onAdd = (quantity) => {
+    alert(`Cantidad añadida: ${quantity}`)
+  }
+
+  return (
+    <div className="container">
+
+      <p className="container__text">{greeting}</p>
+
+      <div className="container__item-list">
+        <ItemCount stock={5} initial={0} onAdd={onAdd} />
+      </div>
+    </div>
   )
 }
 export default ItemListContainer
