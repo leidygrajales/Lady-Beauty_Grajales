@@ -1,6 +1,10 @@
 import { useState } from "react"
 
-const ItemCount = ({ stock = 0, initial = 0, onAdd }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfo } from '@fortawesome/free-solid-svg-icons'
+
+
+const Item = ({ product: { initial, stock, title }, onAdd }) => {
 
     const [value, setValue] = useState(initial <= stock ? initial : stock)
 
@@ -28,9 +32,15 @@ const ItemCount = ({ stock = 0, initial = 0, onAdd }) => {
         }
     }
 
+
     return (
         <div className="item-count">
-            <h3>Titulo</h3>
+            <div className="item-count--header">
+                <h3>{title}</h3>
+                <button>
+                    <FontAwesomeIcon icon={faInfo} />
+                </button>
+            </div>
             <img className="item-count--img" src="/logo192.png" alt="" />
             <div className="item-count--controls">
                 <button className="item-count--controls__subtract" onClick={substractItem}>-</button>
@@ -41,4 +51,5 @@ const ItemCount = ({ stock = 0, initial = 0, onAdd }) => {
         </div>
     )
 }
-export default ItemCount
+
+export default Item
