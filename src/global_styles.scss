@@ -122,3 +122,69 @@ input:before {
 input:-webkit-details-marker {
     display: none;
 }
+
+.lds-spinner {
+    color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: fit-content;
+
+    &.centered {
+        position: absolute;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    &__items {
+        width: 80px;
+        height: 80px;
+        margin: 10px auto;
+
+        & div {
+            transform-origin: 40px 40px;
+            animation: lds-spinner 1.2s linear infinite;
+
+            &:after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: 3px;
+                left: 37px;
+                width: 6px;
+                height: 18px;
+                border-radius: 20%;
+                background: gray;
+            }
+
+            @for $i from 0 through 11 {
+                &:nth-child(#{$i+1}) {
+                    transform: rotate(($i * 30deg));
+                    animation-delay: (-1.2s + ($i / 10));
+                }
+            }
+        }
+    }
+
+    &__description {
+        & p {
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@keyframes lds-spinner {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

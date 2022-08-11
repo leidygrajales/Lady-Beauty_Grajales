@@ -6,10 +6,7 @@ const App = () => {
     <>
       <NavBar />
       <ItemListContainer greeting={'Belleza, cosmetica y cuidado personal '} />
-      <main>
-        <h2>Home</h2>
-      </main>
-      <footer>
+      <footer style={{ display: 'flex' }}>
         <p>footer</p>
       </footer>
     </>
