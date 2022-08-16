@@ -1,11 +1,11 @@
-import NavBar from "./NavBar";
-import ItemListContainer from "./ItemListContainer";
+import NavBar from "./navbar/NavBar";
+import NavigationRouter from "./router/NavigationRouter";
 
 const App = () => {
   return (
     <>
-      <NavBar />
-      <ItemListContainer greeting={'Belleza, cosmetica y cuidado personal '} />
+      <NavigationRouter />
+      {/* <ItemListContainer greeting={'Belleza, Cosmetica y Cuidado personal '} /> */}
       <footer style={{ display: 'flex' }}>
         <p>footer</p>
       </footer>

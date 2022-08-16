@@ -1,12 +1,13 @@
 import { useState } from "react"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfo } from '@fortawesome/free-solid-svg-icons'
+const ItemCount = ({ product }) => {
 
+    const { initial, stock } = product
 
-const Item = ({ product, onAdd, getItem, setItemDetail, setLoadingDetail }) => {
-
-    const { initial, stock, title, img } = product
+    const onAdd = (product, quantity) => {
+        const { title } = product
+        alert(`${title} - Cantidad añadida: ${quantity}`)
+    }
 
     const [value, setValue] = useState(initial <= stock ? initial : stock)
 
@@ -34,29 +35,18 @@ const Item = ({ product, onAdd, getItem, setItemDetail, setLoadingDetail }) => {
         }
     }
 
-
     return (
-        <div className="item-count">
-            <div className="item-count--header">
-                <h3>{title}</h3>
-                <button onClick={() => {
-                    getItem(product).then((data) => {
-                        setItemDetail(data)
-                        setLoadingDetail(false)
-                    })
-                }}>
-                    <FontAwesomeIcon icon={faInfo} />
-                </button>
-            </div>
-            <img className="item-count--img" src={img} alt="" />
+        <>
             <div className="item-count--controls">
                 <button className="item-count--controls__subtract" onClick={substractItem}>-</button>
                 <input className="item-count--controls__input" type="number" min={0} value={value} onChange={handleChangeInput} />
                 <button className="item-count--controls__add" onClick={addItem}>+</button>
             </div>
-            <button disabled={stock === 0 || value === 0} className="item-count--add-cart" onClick={() => onAdd(value)}>Agregar al carrito</button>
-        </div>
+            <button disabled={stock === 0 || value === 0} className="item-count--add-cart" onClick={() => onAdd(product, value)}>Agregar al carrito</button>
+        </>
+
     )
+
 }
 
-export default Item
+export default ItemCount

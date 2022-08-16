@@ -3,7 +3,7 @@ const Spinner = ({ className = '', description = 'Cargando...' }) => {
     const repeat = (quantity) => {
         let items = [];
         for (let i = 0; i < quantity; i++) {
-            items.push(<div></div>);
+            items.push(<div key={i}></div>);
         }
         return items;
     }
