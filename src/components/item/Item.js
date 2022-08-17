@@ -1,23 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
+import { useParams, Link } from 'react-router-dom';
+
 
 import ItemCount from '../common/ItemCount'
 
-const Item = ({ product, getItem, setItemDetail }) => {
+const Item = ({ product }) => {
 
-    const { title, img } = product
+    const { title, img, id } = product
+
+    const { categoryId } = useParams();
 
     return (
         <div className="item-count">
             <div className="item-count--header">
                 <h3>{title}</h3>
-                <button onClick={() => {
-                    getItem(product).then((data) => {
-                        setItemDetail(data)
-                    })
-                }}>
-                    <FontAwesomeIcon icon={faInfo} />
-                </button>
+                <Link to={`/products/${categoryId}/${id}`}>
+                    <button>
+                        <FontAwesomeIcon icon={faInfo} />
+                    </button>
+                </Link>
+
             </div>
             <img className="item-count--img" src={img} alt="" />
             <ItemCount product={product} />
