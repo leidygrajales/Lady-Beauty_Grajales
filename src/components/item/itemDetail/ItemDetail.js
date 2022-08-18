@@ -1,8 +1,8 @@
 import ItemCount from '../../common/ItemCount'
 
-const ItemDetail = ({ itemDetail }) => {
+const ItemDetail = ({ itemDetail, cart, setCart }) => {
 
-    const { title, stock, description, price, img } = itemDetail
+    const { title, stock, description, price, img, id } = itemDetail
 
     return (
         <>
@@ -23,7 +23,11 @@ const ItemDetail = ({ itemDetail }) => {
                     </div>
                 </div>
                 <div className="modal-detail__content--info__footer">
-                    <ItemCount product={itemDetail} />
+                    <ItemCount
+                        product={itemDetail}
+                        initial={cart.find((cartProduct) => cartProduct.id === id) ? cart.find((cartProduct) => cartProduct.id === id).quantity : 0}
+                        cart={cart}
+                        setCart={setCart} />
                 </div>
             </div>
         </>

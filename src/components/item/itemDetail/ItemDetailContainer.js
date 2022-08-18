@@ -1,13 +1,11 @@
 import ItemDetail from "./ItemDetail"
 import Spinner from '../../common/Spinner'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-
 import { useParams, Link } from 'react-router-dom';
 
 
-const ItemDetailContainer = ({ visible, itemDetail, loadingDetail }) => {
+const ItemDetailContainer = ({ visible, itemDetail, loadingDetail, cart, setCart }) => {
 
     const { categoryId } = useParams();
 
@@ -21,7 +19,7 @@ const ItemDetailContainer = ({ visible, itemDetail, loadingDetail }) => {
 
                 {loadingDetail ?
                     <Spinner className={'centered'} description={'Cargando detalle...'} /> :
-                    <ItemDetail itemDetail={itemDetail} />
+                    <ItemDetail itemDetail={itemDetail} cart={cart} setCart={setCart} />
                 }
 
             </div>

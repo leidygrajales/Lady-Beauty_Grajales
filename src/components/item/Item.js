@@ -4,12 +4,18 @@ import { useParams, Link } from 'react-router-dom';
 
 
 import ItemCount from '../common/ItemCount'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const Item = ({ product }) => {
+const Item = ({ product, cart, setCart }) => {
 
     const { title, img, id } = product
-
     const { categoryId } = useParams();
+
+    useEffect(() => {
+        // console.log('cart', cart);
+    }, [cart])
+
 
     return (
         <div className="item-count">
@@ -22,8 +28,19 @@ const Item = ({ product }) => {
                 </Link>
 
             </div>
-            <img className="item-count--img" src={img} alt="" />
-            <ItemCount product={product} />
+            <div className="item-count--body">
+                <img className="item-count--body__img" src={img} alt="" />
+                {
+                    cart.find((cartProduct) => cartProduct.id === id) && <span className='item-count--body__counter'>{cart.find((cartProduct) => cartProduct.id === id).quantity}</span>
+                }
+            </div>
+
+            <ItemCount
+                product={product}
+                initial={cart.find((cartProduct) => cartProduct.id === id) ? cart.find((cartProduct) => cartProduct.id === id).quantity : 0}
+                cart={cart}
+                setCart={setCart} />
+
         </div>
     )
 }

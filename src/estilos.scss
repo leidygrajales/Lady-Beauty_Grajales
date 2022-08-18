@@ -27,9 +27,11 @@
         box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.25);
 
         &__top {
+            color: white;
             display: flex;
             width: 100%;
             padding: 1rem 10rem;
+            align-items: center;
 
             &--title {
                 display: flex;
@@ -49,11 +51,26 @@
             &--icon {
                 padding-top: 1rem;
                 cursor: pointer;
-                font-size: 30px;
+                font-size: 25px;
+                position: relative;
 
+                &__counter {
+                    background-color: #4e4e4e;
+                    font-size: 15px;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+
+                    width: 25px;
+                    height: 25px;
+                    top: 2px;
+                    right: -14px;
+                    border-radius: 50%;
+                }
             }
         }
-
 
         &__items {
             padding: 0.5rem 10rem;
@@ -79,7 +96,6 @@
     & .cart-container {
         margin-top: 160px;
         text-align: center;
-
     }
 
     & .container {
@@ -97,7 +113,6 @@
         }
 
         &__item-list {
-
             display: flex;
             justify-content: flex-start;
             gap: 5%;
@@ -121,7 +136,6 @@
                 -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.5);
                 box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.25);
 
-
                 &--header {
                     width: 100%;
                     text-align: center;
@@ -140,10 +154,34 @@
                     }
                 }
 
-                &--img {
+                &--body {
                     width: 200px;
                     height: 200px;
-                    border-radius: 1rem;
+                    position: relative;
+
+                    &__img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1rem;
+                    }
+
+                    &__counter {
+                        // background-color: rgb(248, 103, 50);
+                        background-color: #4e4e4e;
+                        color: white;
+                        opacity: 0.9;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+
+                        width: 25px;
+                        height: 25px;
+                        top: -12px;
+                        right: -12px;
+                        border-radius: 50%;
+                    }
+
                 }
 
                 &--controls {
@@ -167,14 +205,33 @@
                     }
                 }
 
-                &--add-cart {
+                &--secondary__controls {
                     width: 100%;
-                    background-color: rgb(248, 103, 50);
-                    color: #ffffff;
+                    display: flex;
+                    gap: 5px;
 
-                    &:disabled {
-                        color: #cacaca;
-                        opacity: 0.75;
+                    &--add-cart {
+                        flex-grow: 1;
+                        align-items: center;
+                        background-color: rgb(248, 103, 50);
+                        color: #ffffff;
+
+                        &:disabled {
+                            color: #cacaca;
+                            opacity: 0.75;
+                        }
+                    }
+
+                    &--remove-cart {
+                        flex-shrink: 1;
+                        align-items: center;
+                        background-color: rgb(215 0 0);
+                        color: #ffffff;
+
+                        &:disabled {
+                            color: #cacaca;
+                            opacity: 0.75;
+                        }
                     }
                 }
 
@@ -199,7 +256,6 @@
             top: 0;
             z-index: 2;
 
-
             justify-content: center;
             align-items: center;
 
@@ -210,7 +266,6 @@
             &.hide {
                 display: none;
             }
-
 
             &__content {
                 position: relative;
@@ -269,7 +324,6 @@
                     -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.5);
                     box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.25);
 
-
                     &__header {
                         display: flex;
                         flex: 1;
@@ -284,7 +338,6 @@
                         display: flex;
                         flex: 9;
                         padding: 1rem 0;
-
 
                         & .item-detail-info {
 
@@ -331,22 +384,41 @@
                             }
                         }
 
-                        & .item-count--add-cart {
-                            width: 100%;
-                            background-color: rgb(248, 103, 50);
-                            color: #ffffff;
+                        & .item-count {
 
-                            &:disabled {
-                                color: #cacaca;
-                                opacity: 0.75;
+                            &--secondary__controls {
+                                width: 100%;
+                                display: flex;
+                                gap: 5px;
+
+                                &--add-cart {
+                                    flex-grow: 1;
+                                    align-items: center;
+                                    background-color: rgb(248, 103, 50);
+                                    color: #ffffff;
+
+                                    &:disabled {
+                                        color: #cacaca;
+                                        opacity: 0.75;
+                                    }
+                                }
+
+                                &--remove-cart {
+                                    flex-shrink: 1;
+                                    align-items: center;
+                                    background-color: rgb(215 0 0);
+                                    color: #ffffff;
+
+                                    &:disabled {
+                                        color: #cacaca;
+                                        opacity: 0.75;
+                                    }
+                                }
                             }
                         }
-
                     }
                 }
-
             }
-
         }
     }
 }
