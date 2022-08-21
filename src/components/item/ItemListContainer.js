@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { useEffect, useState } from "react"
 
-const ItemListContainer = ({ products, cart, setCart }) => {
+const ItemListContainer = ({ products }) => {
 
   const { categoryId, productId } = useParams();
 
@@ -90,8 +90,6 @@ const ItemListContainer = ({ products, cart, setCart }) => {
           <Spinner className={'centered'} description={'Cargando Productos'} /> :
           <ItemList
             listProducts={listProducts}
-            cart={cart}
-            setCart={setCart}
           />
         }
       </div>
@@ -100,8 +98,6 @@ const ItemListContainer = ({ products, cart, setCart }) => {
         visible={isModalDetailVisible}
         itemDetail={itemDetail}
         loadingDetail={loadingDetail}
-        cart={cart}
-        setCart={setCart}
       />
     </div>
   )

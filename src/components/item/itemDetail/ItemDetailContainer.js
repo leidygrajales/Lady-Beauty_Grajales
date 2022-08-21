@@ -5,7 +5,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useParams, Link } from 'react-router-dom';
 
 
-const ItemDetailContainer = ({ visible, itemDetail, loadingDetail, cart, setCart }) => {
+const ItemDetailContainer = ({ visible, itemDetail, loadingDetail }) => {
 
     const { categoryId } = useParams();
 
@@ -19,7 +19,7 @@ const ItemDetailContainer = ({ visible, itemDetail, loadingDetail, cart, setCart
 
                 {loadingDetail ?
                     <Spinner className={'centered'} description={'Cargando detalle...'} /> :
-                    <ItemDetail itemDetail={itemDetail} cart={cart} setCart={setCart} />
+                    <ItemDetail itemDetail={itemDetail} />
                 }
 
             </div>

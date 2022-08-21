@@ -1,11 +1,11 @@
 import Item from './Item'
 
-const ItemList = ({ listProducts, cart, setCart }) => {
+const ItemList = ({ listProducts }) => {
 
     return (
         <>
             {listProducts.map((product, index) =>
-                <Item key={index} product={product} cart={cart} setCart={setCart} />
+                <Item key={index} product={product} />
             )}
         </>
     )

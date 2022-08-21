@@ -1,30 +1,17 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from 'react'
+import CartWidget from '../cart/CartWidget'
 
-const NavBar = ({ products, cart }) => {
+const NavBar = ({ products }) => {
 
     const categories = Array(...new Set(products.map((product) => product.category)))
     const navigate = useNavigate();
-
-    useEffect(() => {
-        console.log('cart state', cart);
-    }, [cart])
-
 
     return (
         <header className="header">
             <div className='header__top'>
                 <img onClick={() => navigate('/')} className="header__top--logo" src="/img/logo2.png" />
-                <h1 className="header__top--title">Lady&beauty</h1>
-                <span className='header__top--icon' onClick={() => navigate('/cart')}>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                    {
-                        cart.length > 0 && <span className='header__top--icon__counter'>{cart.length}</span>
-                    }
-
-                </span>
+                <span className="header__top--title">Lady&Beauty</span>
+                <CartWidget />
             </div>
 
             <nav className="header__items">

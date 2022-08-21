@@ -11,7 +11,7 @@
     height: 100vh;
 
     & .header {
-        background-color: rgb(255, 105, 51);
+        background-color: rgb(248, 103, 50);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -39,6 +39,8 @@
                 align-items: center;
                 flex: 1;
                 padding-right: 3rem;
+                font-size: 45px;
+                font-weight: 600;
             }
 
             &--logo {
@@ -94,21 +96,212 @@
     }
 
     & .cart-container {
-        margin-top: 160px;
         text-align: center;
+        width: 80%;
+        height: 100%;
+        margin: 180px auto 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        &__header {
+            & p {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 30px;
+                font-weight: 700;
+                color: #dc582a;
+
+                & span {
+                    font-weight: 500;
+                    color: #4e4e4e;
+                }
+            }
+        }
+
+        &__body {
+            &--table {
+                border-radius: 5px 5px 5px 5px;
+
+                -webkit-box-shadow: -12px 2px 5px 1px rgba(0, 0, 0, 0.5);
+                -moz-box-shadow: -2px 2px 15px 1px rgba(0, 0, 0, 0.5);
+                box-shadow: -2px 2px 15px 1px rgba(0, 0, 0, 0.25);
+
+                &-header {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 0.5rem;
+                    padding: 0.2rem 0;
+                    background-color: rgb(248, 103, 50);
+                    color: white;
+                    border-radius: 5px 5px 0px 0px;
+
+                    & span {
+                        flex: 1;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+
+                &-body {
+
+                    &__row {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 0.5rem;
+
+                        &-cell {
+                            display: flex;
+                            flex: 1;
+                            font-size: 18px;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 1rem;
+
+                            &__image {
+                                width: 130px;
+                                height: 130px;
+                                border-radius: 10px;
+                            }
+
+                            &__trash-icon {
+                                color: #4e4e4e;
+                                cursor: pointer;
+                            }
+
+                            & .item-count--controls {
+                                display: flex;
+                                width: 100%;
+
+                                &__subtract {
+                                    width: 15%;
+                                    border-radius: 6px 0px 0px 6px !important;
+                                }
+
+                                &__input {
+                                    width: 70%;
+                                    border-radius: 0px !important;
+                                    text-align: center;
+                                }
+
+                                &__add {
+                                    width: 15%;
+                                    border-radius: 0px 6px 6px 0px !important;
+                                }
+                            }
+
+                        }
+
+                        &:nth-child(odd) {
+                            background-color: #f5f5f5;
+                        }
+
+                        &:nth-child(even) {
+                            background-color: #e7e7e7;
+                        }
+
+                        &:last-child {
+                            border-radius: 0px 0px 5px 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__purchase-detail {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            width: 40%;
+            gap: 2rem;
+            padding: 2rem;
+
+            border: 1px solid #f1f1f1;
+            border-radius: 15px;
+            -webkit-box-shadow: -2px 2px 15px 0px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: -2px 2px 15px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: -2px 2px 15px 0px rgba(0, 0, 0, 0.25);
+
+            &__header {
+                font-size: 25px;
+                color: #dc582a;
+                font-weight: 600;
+            }
+
+            &__info {
+                display: flex;
+                flex-direction: column;
+                background-color: #f1f1f1;
+                border-radius: 5px;
+
+                -webkit-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+                -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+                box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.25);
+
+                &-item {
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #cacaca;
+                    padding: 1rem 1rem;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    &.total {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            &__controls {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                &-buy {
+                    background-color: rgb(248, 103, 50);
+                    font-size: 20px;
+                    padding: 0.5rem;
+                    color: white;
+                }
+
+                &-clear {
+                    border: 1px solid rgb(248, 103, 50) !important;
+                    padding: 0.5rem;
+                    font-size: 15px;
+                    color: rgb(248, 103, 50);
+                }
+            }
+        }
+
+        &__return {
+            display: flex;
+
+            &-text {
+                font-size: 18px;
+
+                & span {
+                    color: rgb(248, 103, 50);
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
     & .container {
-        margin-top: 160px;
+        margin-top: 170px;
         padding: 0 2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         flex-grow: 1;
 
-
         &__text {
-            font-size: 150%;
+            font-size: 30px;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
@@ -166,7 +359,6 @@
                     }
 
                     &__counter {
-                        // background-color: rgb(248, 103, 50);
                         background-color: #4e4e4e;
                         color: white;
                         opacity: 0.9;
@@ -225,7 +417,7 @@
                     &--remove-cart {
                         flex-shrink: 1;
                         align-items: center;
-                        background-color: rgb(215 0 0);
+                        background-color: #8b8b8b;
                         color: #ffffff;
 
                         &:disabled {
@@ -233,17 +425,6 @@
                             opacity: 0.75;
                         }
                     }
-                }
-
-                input[type="number"] {
-                    -webkit-appearance: textfield;
-                    -moz-appearance: textfield;
-                    appearance: textfield;
-                }
-
-                input[type=number]::-webkit-inner-spin-button,
-                input[type=number]::-webkit-outer-spin-button {
-                    -webkit-appearance: none;
                 }
             }
         }
@@ -353,7 +534,6 @@
                                     font-weight: 500;
                                 }
                             }
-
                         }
                     }
 
@@ -406,7 +586,7 @@
                                 &--remove-cart {
                                     flex-shrink: 1;
                                     align-items: center;
-                                    background-color: rgb(215 0 0);
+                                    background-color: #8b8b8b;
                                     color: #ffffff;
 
                                     &:disabled {

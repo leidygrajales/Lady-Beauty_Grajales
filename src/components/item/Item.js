@@ -2,20 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 import { useParams, Link } from 'react-router-dom';
 
-
 import ItemCount from '../common/ItemCount'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-const Item = ({ product, cart, setCart }) => {
+const Item = ({ product }) => {
+
+    const { cart } = useContext(CartContext);
 
     const { title, img, id } = product
     const { categoryId } = useParams();
-
-    useEffect(() => {
-        // console.log('cart', cart);
-    }, [cart])
-
 
     return (
         <div className="item-count">
@@ -38,8 +34,7 @@ const Item = ({ product, cart, setCart }) => {
             <ItemCount
                 product={product}
                 initial={cart.find((cartProduct) => cartProduct.id === id) ? cart.find((cartProduct) => cartProduct.id === id).quantity : 0}
-                cart={cart}
-                setCart={setCart} />
+            />
 
         </div>
     )
