@@ -1,10 +1,41 @@
+import { collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { db } from '../../FireBase'
 import CartWidget from '../cart/CartWidget'
 
-const NavBar = ({ products }) => {
+const NavBar = () => {
 
-    const categories = Array(...new Set(products.map((product) => product.category)))
     const navigate = useNavigate();
+
+    const [categories, setCategories] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+
+        setLoading(true)
+
+        const categoriesRef = collection(db, "categories")
+        const consulta = getDocs(categoriesRef)
+
+        consulta
+            .then(snapshot => {
+                const allCategories = snapshot.docs.map(doc => {
+                    return {
+                        ...doc.data(),
+                        id: doc.id
+                    }
+                })
+
+                console.log('allCategories', allCategories);
+                setLoading(false)
+                setCategories(allCategories)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
 
     return (
         <header className="header">
@@ -15,9 +46,8 @@ const NavBar = ({ products }) => {
             </div>
 
             <nav className="header__items">
-                <NavLink to={'/products/All'} className={({ isActive }) => isActive ? 'activeUrl' : undefined}>Novedades</NavLink>
-                {categories.map((category, index) => (
-                    <NavLink key={index} to={`/products/${category}`} className={({ isActive }) => isActive ? 'activeUrl' : undefined}>{category}</NavLink>
+                {categories.map(({ id, description }, index) => (
+                    <NavLink key={index} to={`/products/${id}`} className={({ isActive }) => isActive ? 'activeUrl' : undefined}>{description}</NavLink>
                 ))}
 
             </nav>

@@ -4,16 +4,16 @@ import ItemListContainer from "../components/item/ItemListContainer"
 import NavBar from '../components/navbar/NavBar'
 import MyProvider from '../components/context/CartContext'
 
-const NavigationRouter = ({ products }) => {
+const NavigationRouter = () => {
 
     return (
         <BrowserRouter>
             <MyProvider>
-                <NavBar products={products} />
+                <NavBar />
                 <Routes>
                     <Route exact path="/" element={<Navigate to="/products/All" replace />} />
-                    <Route exact path='/products/:categoryId/' element={<ItemListContainer products={products} />} />
-                    <Route exact path='/products/:categoryId/:productId' element={<ItemListContainer products={products} />} />
+                    <Route exact path='/products/:categoryId/' element={<ItemListContainer />} />
+                    <Route exact path='/products/:categoryId/:productId' element={<ItemListContainer />} />
                     <Route exact path="/cart" element={<Cart />} />
                     <Route exact path="*" element={<>404 not found</>} />
                 </Routes>

@@ -2,10 +2,12 @@ import ItemList from "./ItemList"
 import ItemDetailContainer from "./itemDetail/ItemDetailContainer"
 import Spinner from '../common/Spinner'
 import { useParams } from 'react-router-dom';
-
 import { useEffect, useState } from "react"
+import { db } from "../../FireBase"
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 
-const ItemListContainer = ({ products }) => {
+
+const ItemListContainer = () => {
 
   const { categoryId, productId } = useParams();
 
@@ -17,52 +19,54 @@ const ItemListContainer = ({ products }) => {
   const [loadingDetail, setLoadingDetail] = useState(false)
   const [itemDetail, setItemDetail] = useState({})
 
-  const getProducts = (products) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(products)
-      }, 2000);
-    })
+  const getProducts = (category) => {
+
+    const productsRef = collection(db, "products")
+
+    const consulta = category === 'all' ? getDocs(productsRef) : getDocs(query(productsRef, where("category", "==", category)));
+
+    consulta
+      .then(snapshot => {
+        const Products = snapshot.docs.map(doc => {
+          return {
+            ...doc.data(),
+            id: doc.id
+          }
+        })
+        setListProducts(Products)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
-  const getItem = (product) => {
+  const getItem = async (productId) => {
     setIsModalDetailVisible(true)
     setLoadingDetail(true)
 
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        setLoadingDetail(false)
-        resolve(product)
-      }, 2000);
-    });
+    const docRef = doc(db, "products", productId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
 
   }
 
   useEffect(() => {
     setLoading(true)
-    getProducts(products)
-      .then(data => {
-        if (categoryId !== 'All') {
-          const filteredData = data.filter((item) => item.category === categoryId)
-          setListProducts(filteredData)
-        } else {
-          setListProducts(data)
-        }
-        setLoading(false)
-      })
-
+    getProducts(categoryId)
   }, [categoryId])
 
   useEffect(() => {
     if (productId) {
-      const product = products.find((product) => product.id === +productId)
-      if (product) {
-        getItem(product).then((data) => {
-          setItemDetail(data)
-        })
-      } else {
-        alert('Product not found')
-      }
+      getItem(productId).then((product) => {
+        if (product) {
+          setItemDetail(product)
+          setLoadingDetail(false)
+        } else {
+          alert('Product not found')
+        }
+      })
+
     } else {
       setIsModalDetailVisible(false)
       setItemDetail({})

@@ -1,5 +1,7 @@
+import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { createContext } from "react";
+import { db } from "../../FireBase";
 
 export const CartContext = createContext()
 
@@ -30,8 +32,29 @@ const MyProvider = ({ children }) => {
     }
 
     const FinishOrder = () => {
-        EmptyCart()
-        return alert('Pedido Finalizado Exitosamente')
+
+        const orderRef = collection(db, "orders")
+
+        const order = {
+            buyer: { name: "user", phone: "+54 44444444", email: "user@example.com" },
+            items: cart.map(({ id, title, price, quantity }) => (
+                {
+                    id,
+                    title,
+                    price,
+                    quantity
+                })),
+            total: GetTotalCart()
+        }
+
+        addDoc(orderRef, order)
+            .then(({ id }) => {
+                EmptyCart()
+                return alert(`Pedido Finalizado Exitosamente, ID del pedido: ${id}`)
+            })
+            .catch((err) => {
+                return alert('Error al finalizar pedido, intentelo nuevamente')
+            })
     }
 
     const GetCartQuantity = () => {

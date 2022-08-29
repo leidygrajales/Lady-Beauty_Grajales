@@ -44,7 +44,7 @@ const Cart = () => {
           </div>
           <div className="cart-container__return">
             <p className="cart-container__return-text">
-              Para comprar algún producto haz <span onClick={() => navigate('/products/All')}>click aquí</span>
+              Para comprar algún producto haz <span onClick={() => navigate('/products/all')}>click aquí</span>
             </p>
           </div>
         </>
