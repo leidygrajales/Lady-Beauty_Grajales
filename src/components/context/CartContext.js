@@ -1,14 +1,15 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../FireBase";
 
 export const CartContext = createContext()
-
 const { Provider } = CartContext
 
 const MyProvider = ({ children }) => {
 
+    const navigate = useNavigate()
     const [cart, setCart] = useState([])
 
     const AddItem = (product, quantity) => {
@@ -31,12 +32,12 @@ const MyProvider = ({ children }) => {
         return setCart([])
     }
 
-    const FinishOrder = () => {
+    const FinishOrder = (buyer) => {
 
         const orderRef = collection(db, "orders")
 
         const order = {
-            buyer: { name: "user", phone: "+54 44444444", email: "user@example.com" },
+            buyer,
             items: cart.map(({ id, title, price, quantity }) => (
                 {
                     id,
@@ -44,13 +45,16 @@ const MyProvider = ({ children }) => {
                     price,
                     quantity
                 })),
-            total: GetTotalCart()
+            total: GetTotalCart(),
+            date: new Date().toLocaleDateString()
         }
+
+        console.log('order', order);
 
         addDoc(orderRef, order)
             .then(({ id }) => {
                 EmptyCart()
-                return alert(`Pedido Finalizado Exitosamente, ID del pedido: ${id}`)
+                return navigate(`/order/${id}`)
             })
             .catch((err) => {
                 return alert('Error al finalizar pedido, intentelo nuevamente')

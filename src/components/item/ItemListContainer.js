@@ -73,23 +73,12 @@ const ItemListContainer = () => {
     }
   }, [productId])
 
-  useEffect(() => {
-    const body = document.querySelector("#root");
-
-    if (isModalDetailVisible) {
-      body.style.overflow = "hidden";
-    } else {
-      body.style.overflow = "initial";
-    }
-
-  }, [isModalDetailVisible])
-
   return (
-    <div className="container">
+    <div className="container-items">
 
-      <p className="container__text">{'Home'}</p>
+      <p className="container-items__text">{'Home'}</p>
 
-      <div className="container__item-list">
+      <div className="container-items__item-list">
         {loading ?
           <Spinner className={'centered'} description={'Cargando Productos'} /> :
           <ItemList

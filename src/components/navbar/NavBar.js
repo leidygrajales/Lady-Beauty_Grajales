@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { db } from '../../FireBase'
 import CartWidget from '../cart/CartWidget'
+import SkeletonLoader from '../common/SkeletonLoader'
 
 const NavBar = () => {
 
@@ -27,7 +28,6 @@ const NavBar = () => {
                     }
                 })
 
-                console.log('allCategories', allCategories);
                 setLoading(false)
                 setCategories(allCategories)
             })
@@ -40,16 +40,21 @@ const NavBar = () => {
     return (
         <header className="header">
             <div className='header__top'>
-                <img onClick={() => navigate('/')} className="header__top--logo" src="/img/logo2.png" />
+                <img onClick={() => navigate('/')} className="header__top--logo" src="/img/logo2.png" alt='logo' />
                 <span className="header__top--title">Lady&Beauty</span>
                 <CartWidget />
             </div>
 
             <nav className="header__items">
-                {categories.map(({ id, description }, index) => (
-                    <NavLink key={index} to={`/products/${id}`} className={({ isActive }) => isActive ? 'activeUrl' : undefined}>{description}</NavLink>
-                ))}
-
+                {
+                    !loading ? (
+                        categories.map(({ id, description }, index) => (
+                            <NavLink key={index} to={`/products/${id}`} className={({ isActive }) => isActive ? 'activeUrl' : undefined}>{description}</NavLink>
+                        ))
+                    ) : (
+                        <SkeletonLoader quantity={4} />
+                    )
+                }
             </nav>
         </header>
     )

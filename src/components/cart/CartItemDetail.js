@@ -23,17 +23,17 @@ const CartItemDetail = ({ item }) => {
     }
 
     return (
-        <div className="cart-container__body--table-body__row">
-            <div className="cart-container__body--table-body__row-cell">
-                <img className="cart-container__body--table-body__row-cell__image" src={item.img} alt="" />
+        <div className="container-cart__body--table-body__row">
+            <div className="container-cart__body--table-body__row-cell">
+                <img className="container-cart__body--table-body__row-cell__image" src={item.img} alt="" />
             </div>
-            <div className="cart-container__body--table-body__row-cell">
+            <div className="container-cart__body--table-body__row-cell">
                 {item.title}
             </div>
-            <div className="cart-container__body--table-body__row-cell">
+            <div className="container-cart__body--table-body__row-cell">
                 {item.price}€
             </div>
-            <div className="cart-container__body--table-body__row-cell">
+            <div className="container-cart__body--table-body__row-cell">
                 <ItemCounterControl
                     value={quantity}
                     addQuantity={() => AddProductQuantity(item)}
@@ -41,11 +41,11 @@ const CartItemDetail = ({ item }) => {
                     handleInputChange={(e) => handleInputChange(e, item)}
                 />
             </div>
-            <div className="cart-container__body--table-body__row-cell">
+            <div className="container-cart__body--table-body__row-cell">
                 {GetTotalItem(item)}€
             </div>
-            <div className="cart-container__body--table-body__row-cell">
-                <span className='cart-container__body--table-body__row-cell__trash-icon' onClick={() => DeleteItem(id)}>
+            <div className="container-cart__body--table-body__row-cell">
+                <span className='container-cart__body--table-body__row-cell__trash-icon' onClick={() => DeleteItem(id)}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                 </span>
             </div>

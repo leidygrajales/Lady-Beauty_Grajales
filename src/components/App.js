@@ -4,7 +4,6 @@ import "../FireBase"
 
 const App = () => {
 
-
   return (
     <>
       <NavigationRouter />

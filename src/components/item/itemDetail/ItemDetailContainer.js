@@ -1,29 +1,24 @@
 import ItemDetail from "./ItemDetail"
 import Spinner from '../../common/Spinner'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Modal from "../../common/Modal";
 
 
 const ItemDetailContainer = ({ visible, itemDetail, loadingDetail }) => {
-
+    const navigate = useNavigate();
     const { categoryId } = useParams();
 
+    const onCloseModal = () => {
+        navigate(`/products/${categoryId}`)
+    }
+
     return (
-        <div className={`modal-detail ${visible ? 'show' : 'hide'}`}>
-
-            <div className="modal-detail__content">
-                <Link to={`/products/${categoryId}`} className="modal-detail__content--close">
-                    <FontAwesomeIcon icon={faXmark} />
-                </Link>
-
-                {loadingDetail ?
-                    <Spinner className={'centered'} description={'Cargando detalle...'} /> :
-                    <ItemDetail itemDetail={itemDetail} />
-                }
-
-            </div>
-        </div>
+        <Modal visible={visible} onCloseModal={onCloseModal}>
+            {loadingDetail ?
+                <Spinner className={'centered'} description={'Cargando detalle...'} /> :
+                <ItemDetail itemDetail={itemDetail} />
+            }
+        </Modal>
     )
 }
 
