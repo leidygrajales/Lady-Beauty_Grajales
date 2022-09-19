@@ -6,6 +6,7 @@ import MyProvider from '../components/context/CartContext'
 import Order from '../components/order/Order'
 import Footer from "../components/footer/Footer"
 
+
 const NavigationRouter = () => {
 
     return (

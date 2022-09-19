@@ -49,8 +49,6 @@ const MyProvider = ({ children }) => {
             date: new Date().toLocaleDateString()
         }
 
-        console.log('order', order);
-
         addDoc(orderRef, order)
             .then(({ id }) => {
                 EmptyCart()

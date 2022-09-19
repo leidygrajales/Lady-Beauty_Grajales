@@ -13,7 +13,6 @@ const NavBar = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-
         setLoading(true)
 
         const categoriesRef = collection(db, "categories")

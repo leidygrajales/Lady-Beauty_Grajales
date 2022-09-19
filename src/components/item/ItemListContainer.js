@@ -1,6 +1,7 @@
 import ItemList from "./ItemList"
 import ItemDetailContainer from "./itemDetail/ItemDetailContainer"
 import Spinner from '../common/Spinner'
+import Container from "../Container";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react"
 import { db } from "../../FireBase"
@@ -19,11 +20,35 @@ const ItemListContainer = () => {
   const [loadingDetail, setLoadingDetail] = useState(false)
   const [itemDetail, setItemDetail] = useState({})
 
+  const [loadingCatDesc, setLoadingCatDesc] = useState(false)
+  const [catDesc, setCatDesc] = useState('')
+
+
+  const getCategoryDescription = () => {
+
+    setLoadingCatDesc(true)
+
+    const categoriesRef = collection(db, "categories")
+    const consulta = getDocs(query(categoriesRef))
+
+
+
+    consulta
+      .then(snapshot => {
+        setCatDesc(snapshot.docs.find((doc) => doc.id === categoryId).data().description)
+        setLoadingCatDesc(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+  }
+
   const getProducts = (category) => {
 
     const productsRef = collection(db, "products")
 
-    const consulta = category === 'all' ? getDocs(productsRef) : getDocs(query(productsRef, where("category", "==", category)));
+    const consulta = category === 'all' ? getDocs(query(productsRef, where("novelty", "==", true))) : getDocs(query(productsRef, where("category", "==", category)));
 
     consulta
       .then(snapshot => {
@@ -53,6 +78,7 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true)
+    getCategoryDescription()
     getProducts(categoryId)
   }, [categoryId])
 
@@ -75,8 +101,8 @@ const ItemListContainer = () => {
 
   return (
     <div className="container-items">
-
-      <p className="container-items__text">{'Home'}</p>
+      {categoryId == 'all' && !loading && <Container />}
+      {!loading && <p className="container-items__text">{catDesc}</p>}
 
       <div className="container-items__item-list">
         {loading ?
